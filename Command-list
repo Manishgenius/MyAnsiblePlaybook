@@ -1,0 +1,18 @@
+1. how to check syntax
+ansible-playbook playbookname.yml --syntax
+
+2. how to dry run playbook
+ansible-playbook playbookname.yml --check
+
+3.How to run playbook in verbose mode or see logs
+ansible-playbook playbookname.yml -v
+ansible-playbook playbookname.yml -vv
+ansible-playbook playbookname.yml -vvv
+
+4 How to run task after confirmation only in playbook
+ansible-playbook playbookname.yml --step
+ansible-playbook playbookname.yml -v --step
+
+5.how to run specific task in playbook or specific task or run some few task
+
+
