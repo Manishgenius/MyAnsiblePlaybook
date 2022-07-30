@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  tasks: 
+  - name: remove httpd 
+    yum:
+     name : httpd
+     state: absent
+  - name : remove file
+    file:
+     path: /var/www/html/index
+     state: absent
+

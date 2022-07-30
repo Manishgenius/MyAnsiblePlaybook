@@ -1,0 +1,32 @@
+- hosts: all
+  gather_facts: no
+  become: true
+  vars:
+    name: Manish Pandey
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
+      tags:
+        - install
+    - name: Print Variable Value
+      debug:
+        msg: "Variable value is {{name}}"
+    - name: copy index.html
+      template:
+        src: index.html
+        dest: /var/www/html/index.html
+      tags:
+        - copy
+      notify:
+        - start httpd service
+          
+  handlers:
+    - name : start httpd service
+      service:
+        name: httpd
+        state: started
+      tags:
+        - start
+        - install 

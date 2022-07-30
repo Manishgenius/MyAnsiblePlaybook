@@ -1,13 +1,15 @@
---- # Conditional Playbook
-- hosts: demo
-  user: ansible
-  become: ssh
-  connection: ssh
+- hosts: all
+  become: true
   gather_facts: yes
   tasks:
-          - name: Install apache server for debain family
-            command: apt-get -y install apache2
-            when: ansible_os_family == "Debian"
-          - name: Install apache server for redhat
-            command: yum -y install httpd
-            when: ansible_os_family == "RedHat"
+    - name: install git software
+      apt:
+        name: git
+        state: present
+      when: ansible_facts['os_family'] == "Debain"
+    - name: install git software on Redhat
+      yum:
+        name: git
+        state: absent
+      when: ansible_facts['os_family'] == "Redhat"  
+

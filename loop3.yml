@@ -1,0 +1,11 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Copy Files
+      copy:
+       src: "{{item.source}}"
+       dest: "{{item.destination}}"
+       mode: "{{item.mode}}"
+      with_items:
+        - {source: "/home/ansible/abc.txt", destination: "/home/ansible/abc.txt", "mode":"0400"}
+        - {source: "/home/ansible/index.html", destination: "/home/ansible/index.html", "mode":"0777"}
