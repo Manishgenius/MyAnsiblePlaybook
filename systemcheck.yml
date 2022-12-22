@@ -1,0 +1,43 @@
+---
+- name: Linux Server Health Check
+  gather_facts: no
+  hosts: all
+
+  tasks:
+    - name: 'Checking CPU Usage'
+      shell: |
+         top -b  -n 1 -d1 | grep "Cpu(s)" | awk '{print $2 }'
+      register: cpu1sec
+
+    - name: 'Checking Disk Usage'
+      shell: |
+          df / | grep / | awk '{ print $5}' | sed 's/%//g'
+      register: disk
+
+    - name: 'Check Memory Usage'
+      shell: |
+          free | awk '/Mem/{printf("RAM Usage: %.2f\n"), $3/$2*100}'| awk '{print $3}' | cut -d. -f1
+      register: mem
+
+
+    - name: 'Current CPU Usage'
+      debug:
+        msg:
+          - -------------------------------------------------------
+          - CPU Utilization = {{ cpu1sec.stdout }}%
+          - -------------------------------------------------------
+             
+    - name: 'Current Disk Usage'
+      debug:
+        msg:
+          - -------------------------------------------------------
+          - Disk Utilization = ( 100 - idle time ) = {{ disk.stdout }}%
+          - -------------------------------------------------------
+    
+
+    - name: 'Current Memory Usage'
+      debug:
+        msg:
+          - -------------------------------------------------------
+          - Mem Utilization = ( 100 - idle time ) = {{ mem.stdout }}%
+          - -------------------------------------------------------
