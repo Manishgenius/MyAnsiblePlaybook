@@ -1,0 +1,77 @@
+       ansible-doc -l
+  
+       ansible-doc -l | grep wc -l
+  742  ansible-doc -l | wc -l
+  743  ansible-doc -l > ansible_module
+  744  cat ansible_module | grep aws
+  
+  746  cat ansible_module | grep azure
+  
+  748  cat ansible_module | grep ibm
+  
+  750  cat ansible_module | grep ocean
+  
+  752  cat ansible_module | grep ping
+  
+  754  cat ansible_module | grep shell
+  755  cat ansible_module | grep command
+  
+  
+  758  ansible all -m shell -a "who"
+ 
+  
+  766  ansible all -m ping
+  767  
+  768  anisble all -m shell -a "uptime"
+  
+  
+  771  ANSIBLE_KEEP_REMOTE_FILES=1 ansible all -m shell -a "uptime"
+  
+ 
+  
+  780  ansible all -m copy -a "src=/home/ubuntu/test.txt src=/tmp"
+  781  ansible all -m copy -a "src=/home/ubuntu/test.txt dst=/tmp"
+  782  ansible all -m copy -a "src=/home/ubuntu/test.txt dest=/tmp"
+  
+  785  ansible all -m copy -a "src=/home/ubuntu/test.txt dest=/tmp"
+  
+  787  ansible all -m copy -a "content='Hello Manish' dest=/tmp"
+  788  ansible all -m copy -a "content='Hello Manish' dest=/tmp/manish.txt"
+  
+  790  ansible all -m file -a "path=tmp/test1 state=touch"
+  791  ansible all -m file -a "dest=tmp/test1 state=touch"
+  
+  793  ansible all -m file -a "dest=tmp/test.txt state=touch"
+  794  ansible all -m file -a "dest=/tmp/test.txt state=touch"
+  
+  796  ansible all -m file -a "dest=/tmp/test.txt state=touch"
+  797  ansible all -m file -a "dest=/tmp/test.txt state=absent"
+  798  ansible all -m file -a "dest=/tmp/test.py  state=touch mode=0777"
+  
+  800  ansible all -m file -a "dest=/tmp/temp/manish state=directory mode=0777"
+  801  ansible all -m file -a "dest=/tmp/temp/manish state=absent mode=0777"
+  
+  803  ansible all -m shell -a " sudo yum list installed | grep nginx"
+  804  ansible all -m shell -a " apt list | grep nginx"
+ 
+  806  ansible all -m shell -a " apt list"
+  
+  808  ansible all -m shell -a "apt list --installed"
+  809  ansible all -m shell -a "apt list --installed| grep httpd"
+  810  ansible all -m shell -a "apt list --installed| grep apache2 "
+  811  ansible all -m shell -a "apt list --installed| grep git "
+  
+  813  ansible all -m apt -a "name=nginx state=present"
+  814  ansible all -m yum -a "name=nginx state=present"
+  
+  816  ansible all -m apt -a "name=nginx state=present"
+  817  ansible all -m apt -a "name=git state=present"
+  818  ansible all -m apt -a "name=git state=present" -b
+  
+  820  ansible all -m apt -a "name=git state=present" -b
+  821  ansible all -m apt -a "name=git state=absent" -b
+  822  ansible all -m apt -a "name=git state=present" -b
+  
+  824  ansible all -m apt -a "name=git state=latest" -b
+  825  ansible all -m apt -a "name=python3 state=latest" -b
+  826  ansible all -m apt -a "name=apache2 state=latest" -b
